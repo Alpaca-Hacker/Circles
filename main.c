@@ -17,6 +17,23 @@ int main() {
     borderPattern(pixels, FOREGROUND, BACKGROUND, WIDTH, HEIGHT, 8);
 
     int result = savePPM("border.ppm", pixels, WIDTH, HEIGHT);
+    if (result != 0){
+        return result;
+    }
+
+    checkerPattern(pixels, FOREGROUND, BACKGROUND, WIDTH, HEIGHT, 32);
+
+    result = savePPM("checker.ppm", pixels, WIDTH, HEIGHT);
+    if (result != 0){
+        return result;
+    }
+
+    stripesPattern(pixels, FOREGROUND, BACKGROUND, WIDTH, HEIGHT, 16);
+
+    result = savePPM("stripes.ppm", pixels, WIDTH, HEIGHT);
+    if (result != 0){
+        return result;
+    }
 
     return result;
 }

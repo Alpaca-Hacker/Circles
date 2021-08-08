@@ -7,5 +7,12 @@
 
 #endif //CIRCLES_SHAPES_H
 
-void borderPattern(unsigned long pixels[], const unsigned long foreground, const unsigned long background,
-                   const size_t width, const size_t height, const size_t size);
+void borderPattern(unsigned long pixels[],  unsigned long foreground, unsigned long background,
+                    size_t width,  size_t height,  size_t size);
+
+void checkerPattern(unsigned long pixels[], unsigned long foreground, unsigned long background,
+                    size_t width, size_t height, size_t tileSize);
+
+void stripesPattern(unsigned long pixels[], unsigned long foreground, unsigned long background,
+                    size_t width, size_t height, size_t tileSize);
+
