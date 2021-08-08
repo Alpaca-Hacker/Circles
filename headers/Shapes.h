@@ -16,3 +16,8 @@ void checkerPattern(unsigned long pixels[], unsigned long foreground, unsigned l
 void stripesPattern(unsigned long pixels[], unsigned long foreground, unsigned long background,
                     size_t width, size_t height, size_t tileSize);
 
+void solidCircle(unsigned long pixels[], unsigned long foreground, unsigned long background,
+                    size_t width, size_t height, size_t radius);
+
+void hollowCircle(unsigned long pixels[], unsigned long foreground, unsigned long background,
+                 size_t width, size_t height, size_t radius);

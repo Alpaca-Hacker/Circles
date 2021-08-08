@@ -39,3 +39,62 @@ void stripesPattern(unsigned long pixels[], unsigned long foreground, unsigned l
         }
     }
 }
+
+void solidCircle(unsigned long pixels[], unsigned long foreground, unsigned long background,
+                 size_t width, size_t height, size_t radius){
+            long cx = (long)width;
+            long cy = (long)height;
+            long r = (long)radius * 2;
+
+            // Calculated twice the size in order to use sub pixel calculations
+            for (size_t y = 0; y < height; ++y) {
+                for (size_t x = 0; x < width; ++x) {
+                    long dx = cx - x * 2 - 1;
+                    long dy = cy - y * 2 - 1;
+
+                    pixels[y * width + x] = (dx * dx + dy*dy <= r*r) ? foreground : background;
+        }
+    }
+}
+
+void hollowCircle(unsigned long pixels[], unsigned long foreground, unsigned long background,
+                 size_t width, size_t height, size_t radius){
+
+    fillPixels(pixels, background, width * height);
+
+    float w = (float)width;
+    float h = (float)height;
+    float r = (float)radius;
+    float cx = w / 2.0f;
+    float cy = h / 2.0f;
+
+    float x = 0.0f;
+    float y = r - 0.5f;
+
+    while (x <= y){
+        float px = x + cx;
+        float py = y + cy;
+
+        if (px <= width && py <= height){
+            size_t dx = (size_t)px;
+            size_t dy = (size_t)py;
+
+            pixels[dy * width + dx] = foreground;
+            pixels[dx * width + dy] = foreground;
+
+            pixels[(height - dy) * width + dx] = foreground;
+            pixels[dx * width + (height - dy)] = foreground;
+
+            pixels[dy * width + (width - dx)] = foreground;
+            pixels[(width - dx) * width + dy] = foreground;
+
+            pixels[(height - dy) * width + (width - dx)] = foreground;
+            pixels[(width - dx) * width + (height - dy)] = foreground;
+        }
+
+        x += 1.0f;
+        if (x*x + y*y > r*r) {
+            y -= 1.0f;
+        }
+    }
+}
