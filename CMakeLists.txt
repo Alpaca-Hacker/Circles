@@ -3,4 +3,4 @@ project(Circles C)
 
 set(CMAKE_C_STANDARD 11)
 
-add_executable(Circles main.c)
+add_executable(Circles main.c Shapes.c headers/Shapes.h ppmHelper.c headers/ppmHelper.h)
