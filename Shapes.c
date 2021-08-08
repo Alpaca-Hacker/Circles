@@ -62,39 +62,34 @@ void hollowCircle(unsigned long pixels[], unsigned long foreground, unsigned lon
 
     fillPixels(pixels, background, width * height);
 
-    float w = (float)width;
-    float h = (float)height;
-    float r = (float)radius;
-    float cx = w / 2.0f;
-    float cy = h / 2.0f;
+    size_t r = radius * 2;
+    size_t cx = width;
+    size_t cy = height;
+    size_t x = 0;
+    size_t y = r - 1;
 
-    float x = 0.0f;
-    float y = r - 0.5f;
+    while (x <= y) {
+        size_t px = (x + cx) / 2;
+        size_t py = (y + cy) / 2;
 
-    while (x <= y){
-        float px = x + cx;
-        float py = y + cy;
+        if (px <= width && py <= height) {
 
-        if (px <= width && py <= height){
-            size_t dx = (size_t)px;
-            size_t dy = (size_t)py;
+            pixels[py * width + px] = foreground;
+            pixels[px * width + py] = foreground;
 
-            pixels[dy * width + dx] = foreground;
-            pixels[dx * width + dy] = foreground;
+            pixels[(height - py) * width + px] = foreground;
+            pixels[px * width + (height - py)] = foreground;
 
-            pixels[(height - dy) * width + dx] = foreground;
-            pixels[dx * width + (height - dy)] = foreground;
+            pixels[py * width + (width - px)] = foreground;
+            pixels[(width - px) * width + py] = foreground;
 
-            pixels[dy * width + (width - dx)] = foreground;
-            pixels[(width - dx) * width + dy] = foreground;
-
-            pixels[(height - dy) * width + (width - dx)] = foreground;
-            pixels[(width - dx) * width + (height - dy)] = foreground;
+            pixels[(height - py) * width + (width - px)] = foreground;
+            pixels[(width - px) * width + (height - py)] = foreground;
         }
 
-        x += 1.0f;
+        x += 1;
         if (x*x + y*y > r*r) {
-            y -= 1.0f;
+            y -= 1;
         }
     }
 }
