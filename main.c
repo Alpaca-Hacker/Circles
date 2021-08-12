@@ -46,12 +46,14 @@ int main() {
     fillPixels(pixels, CHECK_COLOUR, WIDTH * HEIGHT);
     hollowCircle(pixels, FOREGROUND, BACKGROUND, WIDTH, HEIGHT, WIDTH / 3);
 
-    savePPM("hollowCircle.ppm", pixels, WIDTH, HEIGHT);
+    result = savePPM("hollowCircle.ppm", pixels, WIDTH, HEIGHT);
+
+    if (result != 0) {
+        return result;
+    }
 
     fillPixels(pixels, CHECK_COLOUR, WIDTH * HEIGHT);
-
     drawRecords(pixels, FOREGROUND, BACKGROUND, WIDTH, HEIGHT, WIDTH / 3);
-
     result = savePPM("record.ppm", pixels, WIDTH, HEIGHT);
 
     return result;

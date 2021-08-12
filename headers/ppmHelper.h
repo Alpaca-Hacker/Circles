@@ -9,4 +9,4 @@
 
 void fillPixels(unsigned long pixels[], unsigned long colour, size_t size);
 
-int savePPM(char *fileName, unsigned long pixels[], size_t width, size_t height);
+int savePPM(char *fileName, const unsigned long pixels[], size_t width, size_t height);
