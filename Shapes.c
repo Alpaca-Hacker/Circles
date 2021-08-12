@@ -42,25 +42,32 @@ void stripesPattern(unsigned long pixels[], unsigned long foreground, unsigned l
 
 void solidCircle(unsigned long pixels[], unsigned long foreground, unsigned long background,
                  size_t width, size_t height, size_t radius){
-            long cx = (long)width;
-            long cy = (long)height;
-            long r = (long)radius * 2;
+    long cx = (long) width;
+    long cy = (long) height;
+    long r = (long) radius * 2;
 
-            // Calculated twice the size in order to use sub pixel calculations
-            for (size_t y = 0; y < height; ++y) {
-                for (size_t x = 0; x < width; ++x) {
-                    long dx = cx - x * 2 - 1;
-                    long dy = cy - y * 2 - 1;
+    // Calculated twice the size in order to use sub pixel calculations
+    for (size_t y = 0; y < height; ++y) {
+        for (size_t x = 0; x < width; ++x) {
+            long dx = cx - x * 2 - 1;
+            long dy = cy - y * 2 - 1;
 
-                    pixels[y * width + x] = (dx * dx + dy*dy <= r*r) ? foreground : background;
+            pixels[y * width + x] = (dx * dx + dy * dy <= r * r) ? foreground : background;
         }
     }
 }
 
 void hollowCircle(unsigned long pixels[], unsigned long foreground, unsigned long background,
-                 size_t width, size_t height, size_t radius){
-
+                  size_t width, size_t height, size_t radius) {
     fillPixels(pixels, background, width * height);
+
+    drawCircle(pixels, foreground, width, height, radius);
+}
+
+void drawCircle(unsigned long pixels[], unsigned long foreground,
+                size_t width, size_t height, size_t radius);
+
+void drawCircle(unsigned long *pixels, unsigned long foreground, size_t width, size_t height, size_t radius) {
 
     size_t r = radius * 2;
     size_t cx = width;
@@ -88,8 +95,17 @@ void hollowCircle(unsigned long pixels[], unsigned long foreground, unsigned lon
         }
 
         x += 1;
-        if (x*x + y*y > r*r) {
+        if (x * x + y * y > r * r) {
             y -= 1;
         }
+    }
+}
+
+void drawRecords(unsigned long pixels[], unsigned long foreground, unsigned long background,
+                 size_t width, size_t height, size_t maxRadius) {
+    fillPixels(pixels, background, width * height);
+
+    for (size_t i = maxRadius / 10; i < maxRadius; i += 3) {
+        drawCircle(pixels, foreground, width, height, i);
     }
 }

@@ -17,7 +17,13 @@ void stripesPattern(unsigned long pixels[], unsigned long foreground, unsigned l
                     size_t width, size_t height, size_t tileSize);
 
 void solidCircle(unsigned long pixels[], unsigned long foreground, unsigned long background,
-                    size_t width, size_t height, size_t radius);
+                 size_t width, size_t height, size_t radius);
 
 void hollowCircle(unsigned long pixels[], unsigned long foreground, unsigned long background,
-                 size_t width, size_t height, size_t radius);
+                  size_t width, size_t height, size_t radius);
+
+void drawRecords(unsigned long pixels[], unsigned long foreground, unsigned long background,
+                 size_t width, size_t height, size_t maxRadius);
+
+void drawCircle(unsigned long pixels[], unsigned long foreground,
+                size_t width, size_t height, size_t radius);

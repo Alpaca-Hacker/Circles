@@ -14,20 +14,15 @@ void fillPixels(unsigned long pixels[], unsigned long colour, size_t size){
 
 int savePPM(char *fileName, unsigned long pixels[], size_t width, size_t height) {
 
-    printf_s("Saving\n");
+    printf("Saving\n");
 
     FILE *file;
 
-    int fileResult = fopen_s(&file, fileName, "wb");
-
-    if (fileResult != 0){
-        printf_s("Error opening file\n");
-        return fileResult;
-    }
+    file = fopen(fileName, "wb");
 
     char header[50];
 
-    sprintf_s(header, 50, "P6\n%d %d 255\n", width, height);
+    sprintf(header, "P6\n%d %d 255\n", width, height);
 
     fputs(header, file);
 
@@ -42,14 +37,7 @@ int savePPM(char *fileName, unsigned long pixels[], size_t width, size_t height)
         }
     }
 
-    fileResult = fclose(file);
-    if (fileResult != 0){
-        printf_s("Error closing file\n");
-        return fileResult;
-    }
-
-
-    printf_s("File %s now saved\n", fileName);
+    printf("File %s now saved\n", fileName);
     return 0;
 
 }
